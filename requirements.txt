@@ -1,0 +1,5 @@
+mlflow
+protobuf==3.19.4
+psycopg2-binary
+pymysql
+boto3
