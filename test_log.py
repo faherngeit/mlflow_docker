@@ -6,6 +6,7 @@ from catboost import CatBoostClassifier
 from sklearn.metrics import roc_auc_score, log_loss
 
 
+
 def log_mlflow():
     print("Running the test script ...")
 
@@ -38,12 +39,12 @@ def log_mlflow():
     stats['test_log_loss'] = log_loss(test_target, test_pred[:, 1])
 
     #Test parametes
-    mlflow.log_param("iterations", params['iterations'])
+    mlflow.log_param("iterations", iterations)
 
     #Test metrics
     mlflow.log_metrics(stats)
 
-    mlflow.catboost.log_model(model, "test_model")
+    # mlflow.catboost.log_model(model, "test_model")
     mlflow.end_run()
 
 if __name__ == "__main__":
