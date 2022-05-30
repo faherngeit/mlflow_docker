@@ -21,7 +21,7 @@ services:
     app:
         restart: always
         build: .
-        image: mlflow_server
+        image: fahrengeit/mlflow_server:v1
         container_name: mlflow_server
         networks:
             - mydefault
@@ -42,7 +42,7 @@ services:
                 --port 5000
                 --host 0.0.0.0 
                 --backend-store-uri $${BACKEND} 
-                --default-artifact-root $${ARTIFACTS}
+                --default-artifact-root ./mlruns
         depends_on:
             - db
 
