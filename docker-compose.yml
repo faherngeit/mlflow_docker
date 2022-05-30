@@ -1,4 +1,33 @@
-version: '3.9'
+#version: "3.9"
+#services:
+#  web:
+#    build: .
+#    ports:
+#      - "12346:5000"
+#    volumes:
+#      - mlflow:/home/node/app
+#  db:
+#    image: postgres
+#    restart: always
+#    environment:
+#      POSTGRES_PASSWORD: example
+#volumes:
+#  mlflow:
+# This version exposes the underlying postgres database as well as the mlflow
+# server, so we can access the database contents directly.
+#
+# Have the following environment vars set in shell before running docker-compose
+# (suggested values here but can use whatever desired):
+# export DB_NAME=mlflowdb
+# export DB_USER=postgres
+# export DB_PW=<somepassword>
+# export DB_PORT=5432
+# export MLFLOW_PORT=5001
+#
+# AWS S3 bucket can be used instead of local drive for artifacts store via
+# commented-out environment lines below.
+
+version: '3.3'
 
 services:
     db:
