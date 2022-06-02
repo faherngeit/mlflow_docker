@@ -1,6 +1,22 @@
 version: '3.3'
 
 services:
+    s3:
+        image: minio/minio:latest
+        restart: unless-stopped
+        ports:
+            - "12348:9000"
+            - "12349:9001"
+        environment:
+            - MINIO_ROOT_USER=mdus9vwRcj5PLAjt82eXrX
+            - MINIO_ROOT_PASSWORD=2a6QQqXKd6KohP7FTr4UjnUA72c8aJcRhegz9YYpzoGf
+        command: server /data --console-address ":9001"
+        networks:
+            - internal
+            - public
+        volumes:
+            - minio_volume:/data
+
     db:
         restart: always
         image: postgres:latest
@@ -8,7 +24,7 @@ services:
         expose:
             - "5432"
         networks:
-            - mydefault
+            - internal
         ports:
             - "5432:5432"
         environment:
@@ -24,19 +40,19 @@ services:
         image: fahrengeit/mlflow_server:v1
         container_name: mlflow_server
         networks:
-            - mydefault
+            - internal
+            - public
         expose:
             - "12346"
         ports:
             - "12346:5000"
         environment:
             - BACKEND=postgresql://postgres:sexample@db:5432/mlflowdb
-            - ARTIFACTS=s3://adtech_mlflow_storage/artifacts/
-            - MLFLOW_S3_ENDPOINT_URL=<some_link_here>
-            - AWS_ACCESS_KEY_ID=<some_key_here>
-            - AWS_SECRET_ACCESS_KEY=<some_secrete_key_here>
-        volumes:
-            - mlrun_data:/mlruns
+            - ARTIFACTS=s3://mlflow-artifacts/
+            - MLFLOW_S3_ENDPOINT_URL=http://s3:9000
+            - AWS_ACCESS_KEY_ID=WmTYkWCnbzeQenfV
+            - AWS_SECRET_ACCESS_KEY=gdlU2neIjXNzw2KZKPj2871XCmEejoCG
+            - AWS_DEFAULT_REGION=us-east-1
 
         command:
             - sh    # (sh allows for var substitution of BACKEND and ARTIFACTS)
@@ -50,9 +66,10 @@ services:
             - db
 
 networks:
-    mydefault:
+    internal:
+    public:
         driver: bridge
 
 volumes:
     db_datapg:
-    mlrun_data:
+    minio_volume:

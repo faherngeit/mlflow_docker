@@ -13,17 +13,23 @@ def log_mlflow():
     with open("credentials.yml", 'r') as f:
         creds = load(f, Loader)
 
-    os.environ['MLFLOW_S3_ENDPOINT_URL'] = creds['MLFLOW_S3_ENDPOINT_URL']
-    os.environ['AWS_ACCESS_KEY_ID'] = creds['AWS_ACCESS_KEY_ID']
-    os.environ['AWS_SECRET_ACCESS_KEY'] = creds['AWS_SECRET_ACCESS_KEY']
-    os.environ['MLFLOW_TRACKING_USERNAME'] = creds['MLFLOW_TRACKING_USERNAME']
-    os.environ['MLFLOW_TRACKING_PASSWORD'] = creds['MLFLOW_TRACKING_PASSWORD']
+    # os.environ['MLFLOW_S3_ENDPOINT_URL'] = creds['MLFLOW_S3_ENDPOINT_URL']
+    # os.environ['AWS_ACCESS_KEY_ID'] = creds['AWS_ACCESS_KEY_ID']
+    # os.environ['AWS_SECRET_ACCESS_KEY'] = creds['AWS_SECRET_ACCESS_KEY']
+    # os.environ['MLFLOW_TRACKING_USERNAME'] = creds['MLFLOW_TRACKING_USERNAME']
+    # os.environ['MLFLOW_TRACKING_PASSWORD'] = creds['MLFLOW_TRACKING_PASSWORD']
+
+    os.environ['AWS_ACCESS_KEY_ID'] = "WmTYkWCnbzeQenfV"
+    os.environ['AWS_SECRET_ACCESS_KEY'] = "gdlU2neIjXNzw2KZKPj2871XCmEejoCG"
+    os.environ['MLFLOW_S3_ENDPOINT_URL'] = 'http://localhost:12348'
+
 
     # Set the experiment name#Connect to tracking server
     # mlflow.set_tracking_uri("http://10.211.55.5:12346")
-    # mlflow.set_tracking_uri("http://0.0.0.0:12346")
-    mlflow.set_tracking_uri(creds['MLFLOW_TRACKING_URI'])
-    mlflow.set_experiment("next_test_log")
+
+    mlflow.set_tracking_uri("http://0.0.0.0:12346")
+    # mlflow.set_tracking_uri(creds['MLFLOW_TRACKING_URI'])
+    mlflow.set_experiment("test_12")
 
     with mlflow.start_run() as run:
         print(mlflow.get_tracking_uri())
