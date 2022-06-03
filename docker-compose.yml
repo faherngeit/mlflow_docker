@@ -37,7 +37,7 @@ services:
     app:
         restart: always
         build: .
-        image: fahrengeit/mlflow_server:v1
+        image: fahrengeit/mlflow_server:v2
         container_name: mlflow_server
         networks:
             - internal
