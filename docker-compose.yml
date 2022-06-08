@@ -8,8 +8,8 @@ services:
             - "12348:9000"
             - "12349:9001"
         environment:
-            - MINIO_ROOT_USER=mdus9vwRcj5PLAjt82eXrX
-            - MINIO_ROOT_PASSWORD=2a6QQqXKd6KohP7FTr4UjnUA72c8aJcRhegz9YYpzoGf
+            - MINIO_ROOT_USER=<>
+            - MINIO_ROOT_PASSWORD=<>
         command: server /data --console-address ":9001"
         networks:
             - internal
@@ -50,8 +50,8 @@ services:
             - BACKEND=postgresql://postgres:sexample@db:5432/mlflowdb
             - ARTIFACTS=s3://mlflow-artifacts/
             - MLFLOW_S3_ENDPOINT_URL=http://s3:9000
-            - AWS_ACCESS_KEY_ID=WmTYkWCnbzeQenfV
-            - AWS_SECRET_ACCESS_KEY=gdlU2neIjXNzw2KZKPj2871XCmEejoCG
+            - AWS_ACCESS_KEY_ID=<>
+            - AWS_SECRET_ACCESS_KEY=<>
             - AWS_DEFAULT_REGION=us-east-1
 
         command:
